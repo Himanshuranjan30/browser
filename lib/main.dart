@@ -1,12 +1,18 @@
+import 'package:browser/Auth/register.dart';
+import 'package:browser/Auth/signin.dart';
 import 'package:browser/browser.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +29,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Browser(),
+      home: Login(),
+      routes: {
+        '/browser': (ctx) => Browser(),
+        '/login': (ctx) => Login(),
+        '/register': (ctx) => Register(),
+      },
     );
   }
 }
